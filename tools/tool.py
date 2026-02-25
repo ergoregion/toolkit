@@ -1,4 +1,4 @@
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 
 class Node:
@@ -29,7 +29,11 @@ def extend_path(old_path, edge, node):
 
 def dijkstra(nodes, edges, start_node, end_node=None, bidirectional=True):
 
-    
+    edges_of_node = dict((n, []) for n in nodes)
+    for edge in edges:
+        edges_of_node[edge.node1].append((edge, edge.node2))
+        if (bidirectional):
+            edges_of_node[edge.node2].append((edge, edge.node1))
 
     reached_nodes: Dict[Node, Path] = {}
     unresolved_reached_nodes: List[Node] = []
